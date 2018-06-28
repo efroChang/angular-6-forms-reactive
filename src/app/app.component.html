@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
 
       <!-- Tell Angular to use the FormGroup in TypeScript -->
-      <form [formGroup]="signupForm">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="username">Username</label>
           <input
@@ -11,6 +11,11 @@
             id="username"
             [formControlName]="'username'"
             class="form-control">
+          <span
+            *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched"
+            class="help-block">
+            Please enter a valid user name!
+          </span>
         </div>
         <div class="form-group">
           <label for="email">email</label>
@@ -19,6 +24,11 @@
             id="email"
             [formControlName]="'email'"
             class="form-control">
+          <span
+            *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"
+            class="help-block">
+            Please enter a valid email!
+          </span>            
         </div>
         <div class="radio" *ngFor="let gender of genders">
           <label>
@@ -28,6 +38,11 @@
               [value]="gender">{{ gender }}
           </label>
         </div>
+        <span
+          *ngIf="!signupForm.valid && signupForm.touched"
+          class="help-block">
+          Please enter a valid data!
+        </span>         
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
