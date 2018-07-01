@@ -39,6 +39,24 @@
         <span *ngIf="!signupForm.valid && signupForm.touched" class="help-block">
           Please enter a valid data!
         </span>
+
+        <!-- Dynamically Adding Controls -->
+        <div formArrayName="hobbies">
+          <h4>Your Hobbies</h4>
+          <button 
+            class="btn btn-default"
+            type="button"
+            (click)="onAddHobby()">
+            Add Hobby
+          </button>
+          <!-- Dynamic Text Controls -->
+          <div
+            class="form-group"
+            *ngFor="let hobbyControl of signupForm.get('hobbies').controls; let i = index">
+            <input type="text" class="form-control" [formControlName]="i">
+          </div>
+        </div>
+
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
